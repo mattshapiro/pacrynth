@@ -21,7 +21,8 @@ public class PathFollower : MonoBehaviour {
 			int nextNode = Random.Range (0, currentNode.children.Length);
 			currentNode = currentNode.children[nextNode];
 		} else {
-			transform.position += delta * Time.deltaTime * speed;
+			//transform.position += delta * Time.smoothDeltaTime * speed;
+			transform.position = Vector3.MoveTowards (transform.position, currentNode.GetPosition(), Time.deltaTime * speed);
 		}
 	}
 }
