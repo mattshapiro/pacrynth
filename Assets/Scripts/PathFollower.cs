@@ -17,8 +17,11 @@ public class PathFollower : MonoBehaviour {
 	void Update () {
 		Vector3 delta = currentNode.GetPosition () - transform.position;
 		if (delta.magnitude < currentNode.GetRadius ()) {
+			int nextNode = 0; 
+			do {
+				nextNode = Random.Range (0, currentNode.children.Length);
+			}while(currentNode.children[nextNode].Equals(lastNode));
 			lastNode = currentNode;
-			int nextNode = Random.Range (0, currentNode.children.Length);
 			currentNode = currentNode.children[nextNode];
 		} else {
 			//transform.position += delta * Time.smoothDeltaTime * speed;
