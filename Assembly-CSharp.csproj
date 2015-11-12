@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraFollower.cs" />
      <Compile Include="Assets\Scripts\HUD.cs" />
+     <Compile Include="Assets\Scripts\PathFollower.cs" />
+     <Compile Include="Assets\Scripts\PathNode.cs" />
      <Compile Include="Assets\Scripts\Resetter.cs" />
      <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\TableMover.cs" />

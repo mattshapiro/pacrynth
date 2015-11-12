@@ -9,6 +9,7 @@ public class TableMover : MonoBehaviour {
 
 	private Rigidbody rb;
 	private bool isMobile;
+	private static float MAX_ANGLE = 60.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -37,8 +38,8 @@ public class TableMover : MonoBehaviour {
 	void UpdateMobile(){
 		float x = -Input.acceleration.x * 180;
 		float y = Input.acceleration.y * 180;
-		x = limit (x, 60);
-		y = limit (y, 60);
+		x = limit (x, MAX_ANGLE);
+		y = limit (y, MAX_ANGLE);
 		Quaternion quato = Quaternion.Euler(y, 0, x);
 		rb.transform.rotation = Quaternion.Lerp(rb.transform.rotation, quato, Time.deltaTime * 5.0f);
 	}

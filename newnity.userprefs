@@ -1,9 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Temp/Compiled-Normal-Diffuse-Android.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PathFollower.cs">
     <Files>
       <File FileName="Temp/Compiled-Normal-Diffuse-Android.shader" Line="1" Column="1" />
-      <File FileName="Assets/SetRenderQueue.cs" Line="24" Column="2" />
+      <File FileName="Assets/Materials/holeShader.shader" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TableMover.cs" Line="40" Column="22" />
+      <File FileName="Assets/Scripts/PathNode.cs" Line="1" Column="1" />
+      <File FileName="Assets/PathFollower.cs" Line="5" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
