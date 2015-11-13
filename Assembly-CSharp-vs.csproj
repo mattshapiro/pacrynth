@@ -46,8 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DotController.cs" />
      <Compile Include="Assets\Scripts\CameraFollower.cs" />
-     <Compile Include="Assets\Scripts\GhostCollider.cs" />
      <Compile Include="Assets\Scripts\GhostController.cs" />
      <Compile Include="Assets\Scripts\HUD.cs" />
      <Compile Include="Assets\Scripts\PathNode.cs" />
@@ -55,7 +55,6 @@
      <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\TableMover.cs" />
      <Compile Include="Assets\Scripts\WindyMover.cs" />
-     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Materials\holeShader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.9/Standalone/UnityEngine.UI.dll</HintPath>
