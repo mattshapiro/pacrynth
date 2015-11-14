@@ -34,6 +34,7 @@ public class GhostController : MonoBehaviour {
 		fright_mode = true;
 		dead_mode = false;
 		renderer.material = fright_material;
+		transform.localScale += new Vector3 (0, 0.1f, 0);
 	}
 
 	// Use this for initialization
@@ -51,6 +52,7 @@ public class GhostController : MonoBehaviour {
 				if(fright_count >= fright_time) {
 					fright_mode = false;
 					renderer.material = live_material;
+					transform.localScale -= new Vector3 (0, 0.1f, 0);
 				}
 			}
 			Vector3 delta = currentNode.GetPosition () - transform.position;
@@ -83,7 +85,8 @@ public class GhostController : MonoBehaviour {
 				// collision with "blue ghost"
 				dead_mode = true;
 				fright_mode = false;
-				renderer.material = dead_material;
+				//renderer.material = dead_material;
+				transform.localScale -= new Vector3 (0, 0.1f, 0);
 				currentNode = (PathNode)GameObject.FindGameObjectsWithTag ("Respawn") [0].GetComponent<PathNode> ();
 			} else {
 				// falls through hole
