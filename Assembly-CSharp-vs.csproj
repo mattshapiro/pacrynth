@@ -46,12 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DotController.cs" />
-     <Compile Include="Assets\PelletController.cs" />
      <Compile Include="Assets\Scripts\CameraFollower.cs" />
+     <Compile Include="Assets\Scripts\DotController.cs" />
      <Compile Include="Assets\Scripts\GhostController.cs" />
      <Compile Include="Assets\Scripts\HUD.cs" />
      <Compile Include="Assets\Scripts\PathNode.cs" />
+     <Compile Include="Assets\Scripts\PelletController.cs" />
      <Compile Include="Assets\Scripts\Resetter.cs" />
      <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\TableMover.cs" />

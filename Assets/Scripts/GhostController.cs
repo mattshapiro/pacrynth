@@ -15,7 +15,7 @@ public class GhostController : MonoBehaviour {
 	private float fright_count;
 	private Material live_material;
 
-	private Renderer renderer;
+	private Renderer rend;
 
 	public void Reset() {
 		stopped = false;
@@ -30,16 +30,18 @@ public class GhostController : MonoBehaviour {
 	}
 
 	public void BeginFrightMode() {
+		if (!fright_mode) {
+			transform.localScale += new Vector3 (0, 0.1f, 0);
+		}
 		fright_count = 0;
 		fright_mode = true;
 		dead_mode = false;
-		renderer.material = fright_material;
-		transform.localScale += new Vector3 (0, 0.1f, 0);
+		rend.material = fright_material;
 	}
 
 	// Use this for initialization
 	void Start () {
-		renderer = GetComponent <Renderer> ();
+		rend = GetComponent <Renderer> ();
 		live_material = renderer.material;
 		Reset ();
 	}
@@ -51,7 +53,7 @@ public class GhostController : MonoBehaviour {
 				fright_count += Time.deltaTime;
 				if(fright_count >= fright_time) {
 					fright_mode = false;
-					renderer.material = live_material;
+					rend.material = live_material;
 					transform.localScale -= new Vector3 (0, 0.1f, 0);
 				}
 			}
@@ -59,7 +61,7 @@ public class GhostController : MonoBehaviour {
 			if (delta.magnitude < currentNode.GetRadius ()) {
 				if(dead_mode) {
 					dead_mode = false;
-					renderer.material = live_material;
+					rend.material = live_material;
 				}
 				int nextNode = 0; 
 				do {
@@ -85,7 +87,6 @@ public class GhostController : MonoBehaviour {
 				// collision with "blue ghost"
 				dead_mode = true;
 				fright_mode = false;
-				//renderer.material = dead_material;
 				transform.localScale -= new Vector3 (0, 0.1f, 0);
 				currentNode = (PathNode)GameObject.FindGameObjectsWithTag ("Respawn") [0].GetComponent<PathNode> ();
 			} else {

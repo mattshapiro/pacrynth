@@ -47,7 +47,7 @@ public class TableMover : MonoBehaviour {
 	void UpdateDesktop(){
 		float horiz = Input.GetAxis ("Horizontal");
 		float vert = Input.GetAxis ("Vertical");
-		Vector3 eulerAngleVelocity = new Vector3(vert * speed, 0f, horiz * speed * -1);
+		Vector3 eulerAngleVelocity = new Vector3(vert * speed, 0f, horiz * speed * -5);
 		eulerAngleVelocity.y = 0;
 		Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
 		rb.MoveRotation(rb.rotation * deltaRotation);
