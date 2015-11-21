@@ -42,7 +42,7 @@ public class GhostController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rend = GetComponent <Renderer> ();
-		live_material = renderer.material;
+		live_material = GetComponent<Renderer>().material;
 		Reset ();
 	}
 	

@@ -8,7 +8,7 @@ public class Resetter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (rb.transform.position.y < -100) {
-			rb.collider.isTrigger = false;
+			rb.GetComponent<Collider>().isTrigger = false;
 			rb.angularVelocity = new Vector3(0f, 0f, 0f);
 			rb.velocity = new Vector3(0f, 0f, 0f);
 			rb.transform.position = new Vector3(0f, 1f, -2f);
