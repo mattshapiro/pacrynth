@@ -4,10 +4,14 @@ using System.Collections;
 public class Resetter : MonoBehaviour {
 
 	public Rigidbody rb;
+	public GameObject ghostPrefab;
 	Lives lives;
 
 	void Start () {
 		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
+		Vector3 zero = new Vector3(0,0,0);
+		GameObject child = (GameObject)Instantiate (ghostPrefab, zero, Quaternion.Euler (zero));
+		child.transform.parent = this.transform;
 	}
 
 	// Update is called once per frame
