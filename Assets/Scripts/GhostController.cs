@@ -6,26 +6,28 @@ public class GhostController : MonoBehaviour {
 
 	public float speed = 3.0f;
 	public float fright_time = 10;
-	public Rigidbody player;
-	public Rigidbody board;
 	public Material fright_material, dead_material;
 
-	private PathNode currentNode, lastNode;
+	private PathNode currentNode, lastNode, primeNode;
 	private bool stopped, fright_mode, dead_mode;
 	private float fright_count;
 	private Material live_material;
 
+	private Rigidbody board;
+	private Rigidbody player;
 	private Renderer rend;
 
 	public void Reset() {
 		stopped = false;
 		fright_mode = false;
-		currentNode = (PathNode)GameObject.FindGameObjectsWithTag ("PrimeNode")[0].GetComponent<PathNode>();
+		currentNode = primeNode;
 		lastNode = (PathNode)GameObject.FindGameObjectsWithTag ("Respawn") [0].GetComponent<PathNode> ();
 		transform.position = lastNode.GetPosition ();
 	}
 
 	public void Stop() {
+		player = (Rigidbody)GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody> ();
+		board = (Rigidbody)GameObject.FindGameObjectWithTag ("Board").GetComponent<Rigidbody> ();
 		stopped = true;
 	}
 
@@ -39,16 +41,24 @@ public class GhostController : MonoBehaviour {
 		rend.material = fright_material;
 	}
 
+	public void Bounce () {
+		PathNode temp = currentNode;
+		currentNode = lastNode;
+		lastNode = currentNode;
+	}
+
 	// Use this for initialization
 	void Start () {
 		rend = GetComponent <Renderer> ();
 		live_material = GetComponent<Renderer>().material;
+		primeNode = (PathNode)GameObject.FindGameObjectsWithTag ("PrimeNode") [0].GetComponent<PathNode> ();
 		Reset ();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (!stopped) {
+			// Fright Mode
 			if(fright_mode) {
 				fright_count += Time.deltaTime;
 				if(fright_count >= fright_time) {
@@ -57,6 +67,8 @@ public class GhostController : MonoBehaviour {
 					transform.localScale -= new Vector3 (0, 0.1f, 0);
 				}
 			}
+
+			// Pathing
 			Vector3 delta = currentNode.GetPosition () - transform.position;
 			if (delta.magnitude < currentNode.GetRadius ()) {
 				if(dead_mode) {
@@ -82,8 +94,7 @@ public class GhostController : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Player")) {
-			if(fright_mode)
-			{
+			if (fright_mode) {
 				// collision with "blue ghost"
 				dead_mode = true;
 				fright_mode = false;
