@@ -6,7 +6,8 @@ public class Lives : Text {
 	int lives;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+		base.Start ();
 		lives = 3;
 		Display ();
 	}

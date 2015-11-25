@@ -6,7 +6,8 @@ public class Score : Text {
 	int score;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+		base.Start ();
 		score = 0;
 		Display ();
 	}

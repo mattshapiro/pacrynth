@@ -54,7 +54,7 @@ public class GhostController : MonoBehaviour {
 		if (thisFrame < prevFrame) {
 			PathNode temp = currentNode;
 			currentNode = lastNode;
-			lastNode = currentNode;
+			lastNode = temp;
 		}
 	}
 
