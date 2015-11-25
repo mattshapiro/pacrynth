@@ -22,10 +22,16 @@ public class Resetter : MonoBehaviour {
 		numGhosts++;
 	}
 
-	void Start () {
-		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
+	void Restart () {
+		numGhosts = 0;
+		spawn_count = 0f;
 		ghosts = new ArrayList ();
 		MakeGhost ();
+	}
+
+	void Start () {
+		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
+		Restart ();
 	}
 
 	// Update is called once per frame
@@ -40,8 +46,10 @@ public class Resetter : MonoBehaviour {
 			transform.rotation = Quaternion.Euler (0f, 0f, 0f);
 			GameObject [] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
 			for(int i = 0; i < ghosts.Length; i++) {
-				ghosts[i].GetComponent <GhostController>().Reset();
+				Destroy(ghosts[i]);
+				ghosts[i] = null;
 			}
+			Restart ();
 		}
 		// ghost spawn timer
 		if (numGhosts < maxGhosts) {
@@ -59,9 +67,9 @@ public class Resetter : MonoBehaviour {
 				GhostController ghost1 = (GhostController)ghosts[i];
 				GhostController ghost2 = (GhostController)ghosts[j];
 				Vector3 distance = ghost1.transform.position - ghost2.transform.position;
-				if(distance.magnitude < ghost_bounce_radius && distance.magnitude > ghost_bounce_radius / 1.5) {
-					ghost1.Bounce ();
-					ghost2.Bounce ();
+				if(distance.magnitude < ghost_bounce_radius) {
+					ghost1.Bounce (ghost2);
+					ghost2.Bounce (ghost1);
 				}
 			}
 		}

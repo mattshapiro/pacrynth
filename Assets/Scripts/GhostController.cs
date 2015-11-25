@@ -17,12 +17,19 @@ public class GhostController : MonoBehaviour {
 	private Rigidbody player;
 	private Renderer rend;
 
+	private Vector3 previousPos;
+
 	public void Reset() {
 		stopped = false;
 		fright_mode = false;
 		currentNode = primeNode;
 		lastNode = (PathNode)GameObject.FindGameObjectsWithTag ("Respawn") [0].GetComponent<PathNode> ();
 		transform.position = lastNode.GetPosition ();
+		previousPos = transform.position;
+	}
+
+	public Vector3 GetPreviousPosition() {
+		return previousPos;
 	}
 
 	public void Stop() {
@@ -41,10 +48,14 @@ public class GhostController : MonoBehaviour {
 		rend.material = fright_material;
 	}
 
-	public void Bounce () {
-		PathNode temp = currentNode;
-		currentNode = lastNode;
-		lastNode = currentNode;
+	public void Bounce (GhostController other) {
+		float thisFrame = (other.transform.position - transform.position).magnitude ;
+		float prevFrame = (other.GetPreviousPosition () - GetPreviousPosition () ).magnitude ;
+		if (thisFrame < prevFrame) {
+			PathNode temp = currentNode;
+			currentNode = lastNode;
+			lastNode = currentNode;
+		}
 	}
 
 	// Use this for initialization
@@ -57,6 +68,8 @@ public class GhostController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		previousPos = transform.position;
+
 		if (!stopped) {
 			// Fright Mode
 			if(fright_mode) {
