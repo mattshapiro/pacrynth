@@ -29,8 +29,11 @@ public class PathNode : MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
-		//Gizmos.color = Color.white;
 		Gizmos.DrawWireSphere (transform.position, RADIUS);
+	}
+
+	void OnDrawGizmosSelected() {
+		//Gizmos.color = Color.white;
 		Gizmos.color = new Color(rgb.x,rgb.y,rgb.z,0);
 		Gizmos.color = Color.green;
 		for (int i = 0; i < children.Length; i++) {
