@@ -78,6 +78,8 @@ public class GhostController : MonoBehaviour {
 					fright_mode = false;
 					rend.material = live_material;
 					transform.localScale -= new Vector3 (0, 0.1f, 0);
+				} else if (fright_count >= fright_time - 3) {
+					// blink
 				}
 			}
 

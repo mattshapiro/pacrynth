@@ -9,19 +9,19 @@ public class Lives : Text {
 	protected override void Start () {
 		base.Start ();
 		lives = 3;
-		Display ();
+		text = "" + lives;
 	}
 	
 	public void Die () {
 		lives--;
-		Display ();
+		if (lives > 0) {
+			text = "" + lives;
+		} else {
+			text = "fuck.";
+		}
 	}
 
 	public int GetScore() {
 		return lives;
-	}
-
-	void Display () {
-		text = "" + lives;
 	}
 }
