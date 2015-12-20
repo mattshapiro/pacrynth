@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Score : Text {
 
-	int score;
+	int score, dot_max, dot_count;
 
 	// Use this for initialization
 	protected override void Start () {

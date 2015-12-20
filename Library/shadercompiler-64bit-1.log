@@ -1,15 +1,3 @@
 Base path: /Applications/Unity/Unity.app/Contents
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-1999196160
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-1969971200
 Cmd: getPlatforms
-Cmd: compileSnippet
-  api=0 type=0 insize=13030 outsize=6436 kw=_SUNDISK_SIMPLE pd= ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=13030 outsize=6 kw=_SUNDISK_SIMPLE pd= ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=13030 outsize=6555 kw=_SUNDISK_NONE pd=UNITY_NO_DXT5nm UNITY_NO_RGBM UNITY_NO_SCREENSPACE_SHADOWS UNITY_NO_LINEAR_COLORSPACE ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=13030 outsize=7614 kw=UNITY_COLORSPACE_GAMMA _SUNDISK_SIMPLE pd=UNITY_NO_DXT5nm UNITY_NO_RGBM UNITY_NO_SCREENSPACE_SHADOWS UNITY_NO_LINEAR_COLORSPACE ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=13030 outsize=6 kw=_SUNDISK_NONE pd=UNITY_NO_DXT5nm UNITY_NO_RGBM UNITY_NO_SCREENSPACE_SHADOWS UNITY_NO_LINEAR_COLORSPACE ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=13030 outsize=6 kw=UNITY_COLORSPACE_GAMMA _SUNDISK_SIMPLE pd=UNITY_NO_DXT5nm UNITY_NO_RGBM UNITY_NO_SCREENSPACE_SHADOWS UNITY_NO_LINEAR_COLORSPACE ok=1

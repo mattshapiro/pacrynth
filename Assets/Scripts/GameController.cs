@@ -21,13 +21,22 @@ public class GameController : MonoBehaviour {
 	private Rigidbody rb;
 	private bool isMobile;
 	private static float MAX_ANGLE = 60.0f;
+	private int dot_count;
+
+	private string LEVEL_KEY = "Level";
+	private int MAX_LEVEL = 3;
 
 	// Use this for initialization
 	void Start () {
+		if (!PlayerPrefs.HasKey (LEVEL_KEY)) {
+			PlayerPrefs.SetInt (LEVEL_KEY, 1);
+		}
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		rb = GetComponent<Rigidbody> ();
 		isMobile = Application.isMobilePlatform;
 		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
 		Restart ();
+		dot_count = GameObject.FindGameObjectsWithTag ("Dot").Length;
 	}
 
 	/******* TILT CONTROLLER ********/
@@ -136,6 +145,20 @@ public class GameController : MonoBehaviour {
 				if(distance.magnitude < ghost_bounce_radius) {
 					ghost1.Bounce (ghost2);
 					ghost2.Bounce (ghost1);
+				}
+			}
+		}
+	}
+
+	public void DotEaten() {
+		dot_count--;
+		if (dot_count == 0) 
+		{
+			// next scene
+			if(PlayerPrefs.HasKey(LEVEL_KEY)) {
+				int level = PlayerPrefs.GetInt (LEVEL_KEY) + 1;
+				if(level <= MAX_LEVEL) { 
+					Application.LoadLevel("Level" + level);
 				}
 			}
 		}

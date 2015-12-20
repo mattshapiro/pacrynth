@@ -5,6 +5,7 @@ public class DotController : MonoBehaviour {
 
 	Score score;
 	GameObject cam;
+	GameController gc;
 
 	bool triggered = false;
 	int self_destruct_timer = 3;
@@ -14,6 +15,7 @@ public class DotController : MonoBehaviour {
 	void Start () { 
 		cam = GameObject.FindGameObjectWithTag("MainCamera");
 		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score>();
+		gc = (GameController)GameObject.FindGameObjectWithTag ("Board").GetComponent<GameController> ();
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -32,6 +34,7 @@ public class DotController : MonoBehaviour {
 			if(self_destruct_count < self_destruct_timer && (cam.transform.position - transform.position).magnitude > close_enough) {
 				transform.position = Vector3.MoveTowards(transform.position, cam.transform.position, 10 * Time.deltaTime);
 			} else {
+				gc.DotEaten();
 				Destroy (gameObject);
 			}
 		}
