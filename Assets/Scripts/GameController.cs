@@ -123,7 +123,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (isDead && Input.touchCount > 0) {
-			Application.LoadLevel (Application.loadedLevel);
+			Application.LoadLevel ("Level1");
 		}
 
 		// ghost spawn timer
