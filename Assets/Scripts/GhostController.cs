@@ -51,7 +51,7 @@ public class GhostController : MonoBehaviour {
 	public void Bounce (GhostController other) {
 		float thisFrame = (other.transform.position - transform.position).magnitude ;
 		float prevFrame = (other.GetPreviousPosition () - GetPreviousPosition () ).magnitude ;
-		if (thisFrame < prevFrame) {
+		if ((thisFrame < prevFrame) && (currentNode != primeNode) && (lastNode != primeNode)) {
 			PathNode temp = currentNode;
 			currentNode = lastNode;
 			lastNode = temp;
