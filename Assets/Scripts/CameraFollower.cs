@@ -4,14 +4,22 @@ using System.Collections;
 public class CameraFollower : MonoBehaviour {
 
 	public GameObject obj;
+	public float speed = 10.0f;
 	private Vector3 offset;
 
 	// Use this for initialization
 	void Start () {
-		offset = transform.position - obj.transform.position;
+		offset = transform.localPosition - obj.transform.localPosition;
+		offset.y = 10;
 	}
 
 	void LateUpdate() {
-		transform.localPosition = obj.transform.localPosition + offset;
+		if (transform.localPosition.y < 10) {
+			transform.localPosition = obj.transform.localPosition + offset;
+		} else {
+			transform.localPosition = Vector3.Slerp(transform.localPosition, 
+			                                              obj.transform.localPosition + offset,
+			                                              Time.deltaTime * speed);
+		}
 	}
 }
