@@ -84,21 +84,23 @@ public class GhostController : MonoBehaviour {
 			}
 
 			// Pathing
-			Vector3 delta = currentNode.GetPosition () - transform.position;
-			if (delta.magnitude < currentNode.GetRadius ()) {
-				if(dead_mode) {
-					dead_mode = false;
-					rend.material = live_material;
+			if (currentNode != null) {
+				Vector3 delta = currentNode.GetPosition () - transform.position;
+				if (delta.magnitude < currentNode.GetRadius ()) {
+					if (dead_mode) {
+						dead_mode = false;
+						rend.material = live_material;
+					}
+					int nextNode = 0; 
+					do {
+						nextNode = Random.Range (0, currentNode.children.Length);
+					} while(currentNode.children [nextNode].Equals (lastNode));
+					lastNode = currentNode;
+					currentNode = currentNode.children [nextNode];
+				} else {
+					//transform.position += delta * Time.smoothDeltaTime * speed;
+					transform.position = Vector3.MoveTowards (transform.position, currentNode.GetPosition (), Time.deltaTime * speed);
 				}
-				int nextNode = 0; 
-				do {
-					nextNode = Random.Range (0, currentNode.children.Length);
-				} while(currentNode.children[nextNode].Equals(lastNode));
-				lastNode = currentNode;
-				currentNode = currentNode.children [nextNode];
-			} else {
-				//transform.position += delta * Time.smoothDeltaTime * speed;
-				transform.position = Vector3.MoveTowards (transform.position, currentNode.GetPosition (), Time.deltaTime * speed);
 			}
 		} else {
 			Vector3 dest = player.transform.position;
