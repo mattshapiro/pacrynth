@@ -23,8 +23,11 @@ public class GhostController : MonoBehaviour {
 		stopped = false;
 		fright_mode = false;
 		currentNode = primeNode;
-		lastNode = (PathNode)GameObject.FindGameObjectsWithTag ("Respawn") [0].GetComponent<PathNode> ();
-		transform.position = lastNode.GetPosition ();
+		GameObject[] objects = GameObject.FindGameObjectsWithTag ("Respawn");
+		if (objects != null && objects.Length > 0) {
+			lastNode = (PathNode)objects [0].GetComponent<PathNode> ();
+			transform.position = lastNode.GetPosition ();
+		}
 		previousPos = transform.position;
 	}
 
@@ -62,7 +65,8 @@ public class GhostController : MonoBehaviour {
 	void Start () {
 		rend = GetComponent <Renderer> ();
 		live_material = GetComponent<Renderer>().material;
-		primeNode = (PathNode)GameObject.FindGameObjectsWithTag ("PrimeNode") [0].GetComponent<PathNode> ();
+		GameObject [] objects = GameObject.FindGameObjectsWithTag ("PrimeNode");
+		primeNode =  (objects != null && objects.Length > 0) ? (PathNode)objects[0].GetComponent<PathNode> () : null;
 		Reset ();
 	}
 	
