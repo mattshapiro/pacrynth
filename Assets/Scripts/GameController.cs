@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -26,6 +27,8 @@ public class GameController : MonoBehaviour {
 	private string LEVEL_KEY = "Level";
 	private int MAX_LEVEL = 3;
 
+	private CameraFollower cameraFollower;
+
 	// Use this for initialization
 	void Start () {
 		if (!PlayerPrefs.HasKey (LEVEL_KEY)) {
@@ -35,6 +38,7 @@ public class GameController : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		isMobile = Application.isMobilePlatform;
 		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
+		cameraFollower = (CameraFollower)GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraFollower> ();
 		Restart ();
 		dot_count = GameObject.FindGameObjectsWithTag ("Dot").Length;
 	}
@@ -89,6 +93,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Restart () {
+		cameraFollower.setActive (true);
 		numGhosts = 0;
 		spawn_count = 0f;
 		ghosts = new ArrayList ();
@@ -123,7 +128,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (isDead && Input.touchCount > 0) {
-			Application.LoadLevel ("Level1");
+			SceneManager.LoadScene ("Level1");
 		}
 
 		// ghost spawn timer
@@ -141,10 +146,12 @@ public class GameController : MonoBehaviour {
 			for(int j = i + 1; j < numGhosts; j++) {
 				GhostController ghost1 = (GhostController)ghosts[i];
 				GhostController ghost2 = (GhostController)ghosts[j];
-				Vector3 distance = ghost1.transform.position - ghost2.transform.position;
-				if(distance.magnitude < ghost_bounce_radius) {
-					ghost1.Bounce (ghost2);
-					ghost2.Bounce (ghost1);
+				if (ghost1 != null && ghost2 != null) {
+					Vector3 distance = ghost1.transform.position - ghost2.transform.position;
+					if (distance.magnitude < ghost_bounce_radius) {
+						ghost1.Bounce (ghost2);
+						ghost2.Bounce (ghost1);
+					}
 				}
 			}
 		}
@@ -158,7 +165,7 @@ public class GameController : MonoBehaviour {
 			if(PlayerPrefs.HasKey(LEVEL_KEY)) {
 				int level = PlayerPrefs.GetInt (LEVEL_KEY) + 1;
 				if(level <= MAX_LEVEL) { 
-					Application.LoadLevel("Level" + level);
+					SceneManager.LoadScene("Level" + level);
 				}
 			}
 		}
