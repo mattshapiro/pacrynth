@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -123,7 +124,8 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (isDead && Input.touchCount > 0) {
-			Application.LoadLevel ("Level1");
+			SceneManager.UnloadScene (SceneManager.GetActiveScene ().name);
+			SceneManager.LoadScene ("Level1");
 		}
 
 		// ghost spawn timer
@@ -141,10 +143,12 @@ public class GameController : MonoBehaviour {
 			for(int j = i + 1; j < numGhosts; j++) {
 				GhostController ghost1 = (GhostController)ghosts[i];
 				GhostController ghost2 = (GhostController)ghosts[j];
-				Vector3 distance = ghost1.transform.position - ghost2.transform.position;
-				if(distance.magnitude < ghost_bounce_radius) {
-					ghost1.Bounce (ghost2);
-					ghost2.Bounce (ghost1);
+				if (ghost1 != null && ghost2 != null) {
+					Vector3 distance = ghost1.transform.position - ghost2.transform.position;
+					if (distance.magnitude < ghost_bounce_radius) {
+						ghost1.Bounce (ghost2);
+						ghost2.Bounce (ghost1);
+					}
 				}
 			}
 		}
@@ -158,7 +162,8 @@ public class GameController : MonoBehaviour {
 			if(PlayerPrefs.HasKey(LEVEL_KEY)) {
 				int level = PlayerPrefs.GetInt (LEVEL_KEY) + 1;
 				if(level <= MAX_LEVEL) { 
-					Application.LoadLevel("Level" + level);
+					SceneManager.UnloadScene (SceneManager.GetActiveScene ().name);
+					SceneManager.LoadScene("Level" + level);
 				}
 			}
 		}
