@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\TableMover.cs" />
      <Compile Include="Assets\Scripts\WindyMover.cs" />
+     <Compile Include="Assets\StartButtonBehaviourScript.cs" />
      <None Include="Assets\Materials\holeShader.shader" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>

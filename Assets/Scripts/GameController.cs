@@ -128,7 +128,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (isDead && Input.touchCount > 0) {
-			SceneManager.LoadScene ("Level1");
+			SceneManager.LoadScene ("Menu");
 		}
 
 		// ghost spawn timer
