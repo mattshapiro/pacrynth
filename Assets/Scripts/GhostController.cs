@@ -108,9 +108,9 @@ public class GhostController : MonoBehaviour {
 				transform.position = Vector3.MoveTowards (transform.position, currentNode.GetPosition (), Time.deltaTime * speed);
 			}
 		} else {
-			Vector3 dest = player.transform.position;
-			dest.y = transform.position.y;
-			transform.position = Vector3.MoveTowards (transform.position, dest, Time.deltaTime * speed);
+			Vector3 dest = transform.position;
+			dest.y = player.transform.position.y;
+			player.transform.position = Vector3.MoveTowards (player.transform.position, dest, Time.deltaTime * speed);
 		}
 	}
 
@@ -125,8 +125,8 @@ public class GhostController : MonoBehaviour {
 			} else {
 				// falls through hole
 				Stop ();
-				player.angularVelocity = new Vector3 (0f, 0f, 0f);
-				player.velocity = new Vector3 (0f, 0f, 0f);
+				//player.angularVelocity = new Vector3 (0f, 0f, 0f);
+				//player.velocity = new Vector3 (0f, 0f, 0f);
 				board.transform.rotation = Quaternion.Euler (0f, 0f, 0f);
 				other.isTrigger = true;
 				cameraFollower.setActive (false);
