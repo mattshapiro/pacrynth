@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
 	public int maxGhosts = 5;
 
 	Lives lives;
+	static int level = 1;
+
 	private int numGhosts = 0;
 	private float spawn_count = 0f;
 	private ArrayList ghosts;
@@ -21,7 +23,7 @@ public class GameController : MonoBehaviour {
 	
 	private Rigidbody rb;
 	private bool isMobile;
-	private static float MAX_ANGLE = 60.0f;
+	private static float MAX_ANGLE = 75.0f;
 	private int dot_count;
 
 	private string LEVEL_KEY = "Level";
@@ -31,9 +33,6 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (!PlayerPrefs.HasKey (LEVEL_KEY)) {
-			PlayerPrefs.SetInt (LEVEL_KEY, 1);
-		}
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		rb = GetComponent<Rigidbody> ();
 		isMobile = Application.isMobilePlatform;
@@ -162,11 +161,11 @@ public class GameController : MonoBehaviour {
 		if (dot_count == 0) 
 		{
 			// next scene
-			if(PlayerPrefs.HasKey(LEVEL_KEY)) {
-				int level = PlayerPrefs.GetInt (LEVEL_KEY) + 1;
-				if(level <= MAX_LEVEL) { 
-					SceneManager.LoadScene("Level" + level);
-				}
+			level = level + 1;
+			if (level <= MAX_LEVEL) { 
+				SceneManager.LoadScene ("Level" + level);
+			} else {
+				// win	
 			}
 		}
 	}
