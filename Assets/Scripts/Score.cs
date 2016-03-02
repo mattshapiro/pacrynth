@@ -28,6 +28,6 @@ public class Score : Text {
 	}
 
 	void Display () {
-		text = "" + score;
+		text = "" + score + "pts";
 	}
 }

@@ -9,13 +9,20 @@ public class Lives : Text {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
-		text = "" + lives;
+		CalcText();
+	}
+
+	void CalcText () {
+		text = "";
+		for (int i = 0; i < lives; i++) {
+			text += "●";
+		}
 	}
 	
 	public void Die () {
 		lives--;
 		if (lives > 0) {
-			text = "" + lives;
+			CalcText();
 		} else {
 			text = "Tap the screen to restart.";
 		}
