@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
 	public int maxGhosts = 5;
 
 	Lives lives;
+	Score score;
 	static int level = 1;
 
 	private int numGhosts = 0;
@@ -37,6 +38,7 @@ public class GameController : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		isMobile = Application.isMobilePlatform;
 		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
+		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
 		cameraFollower = (CameraFollower)GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraFollower> ();
 		Restart ();
 		dot_count = GameObject.FindGameObjectsWithTag ("Dot").Length;
@@ -119,7 +121,7 @@ public class GameController : MonoBehaviour {
 				Destroy(ghosts[i]);
 				ghosts[i] = null;
 			}
-			if(lives.GetScore () <= 0) {
+			if(lives.GetLives () <= 0) {
 				Dead ();
 			} else {
 				Restart ();
@@ -127,6 +129,8 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (isDead && Input.touchCount > 0) {
+			lives.ResetLives ();
+			score.SetScore (0);
 			SceneManager.LoadScene ("Menu");
 		}
 

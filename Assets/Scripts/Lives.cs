@@ -21,7 +21,11 @@ public class Lives : Text {
 		}
 	}
 
-	public int GetScore() {
+	public int GetLives() {
 		return lives;
+	}
+
+	public void ResetLives () {
+		lives = 3;
 	}
 }
