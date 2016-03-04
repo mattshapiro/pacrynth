@@ -34,7 +34,7 @@ public class MenuController : MonoBehaviour {
 	void Update () {
 		float former = mainCamera.transform.rotation.eulerAngles.y;
 		float newgle = (former + (5.0f * Time.deltaTime)) % 360;
-		transform.rotation = Quaternion.Euler (mainCamera.transform.rotation.eulerAngles.x,
+		mainCamera.transform.rotation = Quaternion.Euler (mainCamera.transform.rotation.eulerAngles.x,
 			newgle,//transform.rotation.eulerAngles.y,
 			mainCamera.transform.rotation.eulerAngles.z);
 	}
