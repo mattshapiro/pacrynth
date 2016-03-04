@@ -126,7 +126,7 @@ public class GhostController : MonoBehaviour {
 				fright_mode = false;
 				transform.localScale -= new Vector3 (0, 0.1f, 0);
 				currentNode = (PathNode)GameObject.FindGameObjectsWithTag ("Respawn") [0].GetComponent<PathNode> ();
-			} else {
+			} else if (!dead_mode) {
 				// falls through hole
 				Stop ();
 				//player.angularVelocity = new Vector3 (0f, 0f, 0f);
