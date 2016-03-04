@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour {
 	private ArrayList ghosts;
 	private bool isDead = false;
 
+	private static string HS_KEY = "HS"; // high scores player prefs
+
 	public float speed;
 	
 	private Rigidbody rb;
@@ -102,6 +104,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Dead () {
+		SetHighScore ();
 		isDead = true;
 	}
 
@@ -159,6 +162,20 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	private void SetHighScore () {
+		int hs = score.GetScore();
+		if (PlayerPrefs.HasKey (HS_KEY)) {
+			int old = PlayerPrefs.GetInt (HS_KEY);
+			if (hs > old) {
+				hs = old;	
+			}
+		}
+		// don't set a high score if there isn't a score
+		if (hs > 0) {
+			PlayerPrefs.SetInt (HS_KEY, hs);
+		}
+	}
+
 	public void DotEaten() {
 		dot_count--;
 		if (dot_count == 0) 
@@ -168,7 +185,8 @@ public class GameController : MonoBehaviour {
 				// next scene
 				SceneManager.LoadScene ("Level" + level);
 			} else if (level > MAX_LEVEL) {
-				// win	
+				// win
+				SetHighScore ();
 				SceneManager.LoadScene ("Winner");
 			} else {
 				// huh?
