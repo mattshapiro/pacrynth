@@ -2,13 +2,6 @@
 using System.Collections;
 
 public class menumover : MonoBehaviour {
-
-	Quaternion initialPos;
-
-	// Use this for initialization
-	void Start () {
-		initialPos = transform.rotation;
-	}
 	
 	// Update is called once per frame
 	void Update () {

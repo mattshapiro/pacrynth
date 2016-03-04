@@ -133,4 +133,8 @@ public class GhostController : MonoBehaviour {
 			}
 		}
 	}
+
+	public bool inFrightMode() {
+		return fright_mode;
+	}
 }

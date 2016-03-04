@@ -27,7 +27,6 @@ public class GameController : MonoBehaviour {
 	private static float MAX_ANGLE = 75.0f;
 	private int dot_count;
 
-	private string LEVEL_KEY = "Level";
 	private int MAX_LEVEL = 3;
 
 	private CameraFollower cameraFollower;
@@ -149,7 +148,7 @@ public class GameController : MonoBehaviour {
 			for(int j = i + 1; j < numGhosts; j++) {
 				GhostController ghost1 = (GhostController)ghosts[i];
 				GhostController ghost2 = (GhostController)ghosts[j];
-				if (ghost1 != null && ghost2 != null) {
+				if (ghost1 != null && !ghost1.inFrightMode() && ghost2 != null && !ghost2.inFrightMode()) {
 					Vector3 distance = ghost1.transform.position - ghost2.transform.position;
 					if (distance.magnitude < ghost_bounce_radius) {
 						ghost1.Bounce (ghost2);
@@ -164,12 +163,15 @@ public class GameController : MonoBehaviour {
 		dot_count--;
 		if (dot_count == 0) 
 		{
-			// next scene
 			level = level + 1;
 			if (level <= MAX_LEVEL) { 
+				// next scene
 				SceneManager.LoadScene ("Level" + level);
-			} else {
+			} else if (level > MAX_LEVEL) {
 				// win	
+				SceneManager.LoadScene ("Winner");
+			} else {
+				// huh?
 			}
 		}
 	}
