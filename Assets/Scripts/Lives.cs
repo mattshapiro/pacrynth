@@ -21,7 +21,7 @@ public class Lives : Text {
 	
 	public void Die () {
 		lives--;
-		if (lives > 0) {
+		if (lives >= 0) {
 			CalcText();
 		} else {
 			text = "Tap the screen to restart.";

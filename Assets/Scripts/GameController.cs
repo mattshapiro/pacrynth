@@ -123,7 +123,7 @@ public class GameController : MonoBehaviour {
 				Destroy(ghosts[i]);
 				ghosts[i] = null;
 			}
-			if(lives.GetLives () <= 0) {
+			if(lives.GetLives () < 0) {
 				Dead ();
 			} else {
 				Restart ();
