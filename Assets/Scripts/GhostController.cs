@@ -17,6 +17,8 @@ public class GhostController : MonoBehaviour {
 	private Rigidbody player;
 	private Renderer rend;
 
+	private Score score;
+
 	private Vector3 previousPos;
 	private CameraFollower cameraFollower;
 
@@ -40,6 +42,7 @@ public class GhostController : MonoBehaviour {
 	public void Stop() {
 		player = (Rigidbody)GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody> ();
 		board = (Rigidbody)GameObject.FindGameObjectWithTag ("Board").GetComponent<Rigidbody> ();
+		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
 		stopped = true;
 	}
 
@@ -118,6 +121,7 @@ public class GhostController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Player")) {
 			if (fright_mode) {
 				// collision with "blue ghost"
+				score.AddScore(100);
 				dead_mode = true;
 				fright_mode = false;
 				transform.localScale -= new Vector3 (0, 0.1f, 0);
