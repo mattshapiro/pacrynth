@@ -42,7 +42,6 @@ public class GhostController : MonoBehaviour {
 	public void Stop() {
 		player = (Rigidbody)GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody> ();
 		board = (Rigidbody)GameObject.FindGameObjectWithTag ("Board").GetComponent<Rigidbody> ();
-		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
 		stopped = true;
 	}
 
@@ -73,6 +72,7 @@ public class GhostController : MonoBehaviour {
 		GameObject [] objects = GameObject.FindGameObjectsWithTag ("PrimeNode");
 		primeNode =  (objects != null && objects.Length > 0) ? (PathNode)objects[0].GetComponent<PathNode> () : null;
 		cameraFollower = (CameraFollower)GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraFollower> ();
+		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
 		Reset ();
 	}
 	
