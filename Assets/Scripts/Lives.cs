@@ -24,7 +24,7 @@ public class Lives : Text {
 		if (lives >= 0) {
 			CalcText();
 		} else {
-			text = "Tap the screen to restart.";
+			text = "Game over.  Tap to continue...";
 		}
 	}
 
