@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour {
 		child.transform.parent = this.transform;
 		GhostController ghost = (GhostController)child.GetComponent<GhostController> ();
 		ghosts.Add (ghost);
+		
 		numGhosts++;
 	}
 
@@ -166,7 +167,7 @@ public class GameController : MonoBehaviour {
 		int hs = score.GetScore();
 		if (PlayerPrefs.HasKey (HS_KEY)) {
 			int old = PlayerPrefs.GetInt (HS_KEY);
-			if (hs > old) {
+			if (hs < old) {
 				hs = old;	
 			}
 		}
@@ -183,11 +184,11 @@ public class GameController : MonoBehaviour {
 			level = level + 1;
 			if (level <= MAX_LEVEL) { 
 				// next scene
-				SceneManager.LoadScene ("Level" + level);
+				SceneManager.LoadScene ("Level" + level, LoadSceneMode.Single);
 			} else if (level > MAX_LEVEL) {
 				// win
 				SetHighScore ();
-				SceneManager.LoadScene ("Winner");
+				SceneManager.LoadScene ("Winner", LoadSceneMode.Single);
 			} else {
 				// huh?
 			}

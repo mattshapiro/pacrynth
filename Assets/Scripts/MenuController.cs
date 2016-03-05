@@ -22,12 +22,12 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void onStart() {
-		SceneManager.LoadScene("Level1");
+		SceneManager.LoadScene("Level1", LoadSceneMode.Single);
 	}
 
 	// ug this could have gone better
 	public void onContinue() {
-		SceneManager.LoadScene ("Menu");
+		SceneManager.LoadScene ("Menu", LoadSceneMode.Single);
 	}
 	
 	// Update is called once per frame
