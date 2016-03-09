@@ -23,8 +23,7 @@ public class GameController : MonoBehaviour {
 	private static string HS_KEY = "HS"; // high scores player prefs
 
 	public float speed;
-	
-	private Rigidbody rb;
+
 	private bool isMobile;
 	private static float MAX_ANGLE = 75.0f;
 	private int dot_count;
@@ -36,7 +35,6 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
-		rb = GetComponent<Rigidbody> ();
 		isMobile = Application.isMobilePlatform;
 		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
 		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
@@ -72,7 +70,7 @@ public class GameController : MonoBehaviour {
 		x = limit (x, MAX_ANGLE);
 		y = limit (y, MAX_ANGLE);
 		Quaternion quato = Quaternion.Euler(y, 0, x);
-		rb.transform.rotation = Quaternion.Lerp(rb.transform.rotation, quato, Time.deltaTime * 5.0f);
+		transform.rotation = Quaternion.Lerp(transform.rotation, quato, Time.deltaTime * 5.0f);
 	}
 	
 	void UpdateDesktop(){
@@ -81,7 +79,9 @@ public class GameController : MonoBehaviour {
 		Vector3 eulerAngleVelocity = new Vector3(vert * speed, 0f, horiz * speed * -5);
 		eulerAngleVelocity.y = 0;
 		Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
-		rb.MoveRotation(rb.rotation * deltaRotation);
+		//rb.MoveRotation(rb.rotation * deltaRotation);
+		transform.rotation = transform.rotation * deltaRotation;
+		//transform.rotation.SetFromToRotation(transform.rotation.eulerAngles, (transform.rotation * deltaRotation).eulerAngles);
 	}
 
 	/******* GAME CONTROLLER ********/

@@ -13,7 +13,7 @@ public class GhostController : MonoBehaviour {
 	private float fright_count;
 	private Material live_material;
 
-	private Rigidbody board;
+	private GameObject board;
 	private Rigidbody player;
 	private Renderer rend;
 
@@ -41,7 +41,7 @@ public class GhostController : MonoBehaviour {
 
 	public void Stop() {
 		player = (Rigidbody)GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody> ();
-		board = (Rigidbody)GameObject.FindGameObjectWithTag ("Board").GetComponent<Rigidbody> ();
+		board = (GameObject)GameObject.FindGameObjectWithTag ("Board");
 		stopped = true;
 	}
 

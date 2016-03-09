@@ -22,7 +22,7 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void onStart() {
-		SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+		SceneManager.LoadScene("Level3", LoadSceneMode.Single);
 	}
 
 	// ug this could have gone better
