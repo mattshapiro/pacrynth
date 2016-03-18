@@ -114,16 +114,20 @@ public class GameController : MonoBehaviour {
 		// falling
 		if (player.transform.position.y < -100) {
 			lives.Die ();
-			player.GetComponent<Collider>().isTrigger = false;
-			player.angularVelocity = new Vector3(0f, 0f, 0f);
-			player.velocity = new Vector3(0f, 0f, 0f);
-			player.transform.position = new Vector3(0f, 1f, -2f);
+
 			transform.rotation = Quaternion.Euler (0f, 0f, 0f);
+
 			GameObject [] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
 			for(int i = 0; i < ghosts.Length; i++) {
 				Destroy(ghosts[i]);
 				ghosts[i] = null;
 			}
+
+			player.GetComponent<Collider>().isTrigger = false;
+			player.angularVelocity = new Vector3(0f, 0f, 0f);
+			player.velocity = new Vector3(0f, 0f, 0f);
+			player.transform.position = new Vector3(0f, 1f, -2f);
+
 			if(lives.GetLives () < 0) {
 				Dead ();
 			} else {
