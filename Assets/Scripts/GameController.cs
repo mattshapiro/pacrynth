@@ -30,15 +30,12 @@ public class GameController : MonoBehaviour {
 
 	private int MAX_LEVEL = 3;
 
-	private CameraFollower cameraFollower;
-
 	// Use this for initialization
 	void Start () {
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		isMobile = Application.isMobilePlatform;
 		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
 		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
-		cameraFollower = (CameraFollower)GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraFollower> ();
 		Restart ();
 		dot_count = GameObject.FindGameObjectsWithTag ("Dot").Length;
 	}
@@ -96,7 +93,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Restart () {
-		cameraFollower.setActive (true);
 		numGhosts = 0;
 		spawn_count = 0f;
 		ghosts = new ArrayList ();

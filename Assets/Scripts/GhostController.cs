@@ -20,7 +20,6 @@ public class GhostController : MonoBehaviour {
 	private Score score;
 
 	private Vector3 previousPos;
-	private CameraFollower cameraFollower;
 
 	public void Reset() {
 		stopped = false;
@@ -71,8 +70,7 @@ public class GhostController : MonoBehaviour {
 		live_material = GetComponent<Renderer>().material;
 		GameObject [] objects = GameObject.FindGameObjectsWithTag ("PrimeNode");
 		primeNode =  (objects != null && objects.Length > 0) ? (PathNode)objects[0].GetComponent<PathNode> () : null;
-		cameraFollower = (CameraFollower)GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraFollower> ();
-		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
+        score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
 		Reset ();
 	}
 	
@@ -133,8 +131,7 @@ public class GhostController : MonoBehaviour {
 				//player.velocity = new Vector3 (0f, 0f, 0f);
 				board.transform.rotation = Quaternion.Euler (0f, 0f, 0f);
 				other.isTrigger = true;
-				cameraFollower.setActive (false);
-			}
+            }
 		}
 	}
 
