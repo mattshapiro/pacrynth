@@ -111,6 +111,7 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
+    <Compile Include="Assets\VRControler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Materials\holeShader.shader" />

@@ -122,7 +122,7 @@ public class GameController : MonoBehaviour {
 			player.GetComponent<Collider>().isTrigger = false;
 			player.angularVelocity = new Vector3(0f, 0f, 0f);
 			player.velocity = new Vector3(0f, 0f, 0f);
-			player.transform.position = new Vector3(0f, 10f, -2f);
+			player.transform.position = new Vector3(0f, 20f, -2f);
 
 			if(lives.GetLives () < 0) {
 				Dead ();
