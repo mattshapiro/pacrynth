@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
 	public float spawn_timer = 2.0f;
 	public float ghost_bounce_radius = 1.0f;
 	public int maxGhosts = 5;
-
+    
 	Lives lives;
 	Score score;
 	static int level = 1;
@@ -29,15 +29,15 @@ public class GameController : MonoBehaviour {
 	private int dot_count;
 
 	private int MAX_LEVEL = 3;
-
+    bool isStarted = false;
+    
 	// Use this for initialization
 	void Start () {
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		isMobile = Application.isMobilePlatform;
 		lives = (Lives)GameObject.FindGameObjectWithTag ("Lives").GetComponent<Lives>();
 		score = (Score)GameObject.FindGameObjectWithTag ("Score").GetComponent<Score> ();
-		Restart ();
-		dot_count = GameObject.FindGameObjectsWithTag ("Dot").Length;
+		//Restart ();
 	}
 
 	/******* TILT CONTROLLER ********/
@@ -92,13 +92,15 @@ public class GameController : MonoBehaviour {
 		numGhosts++;
 	}
 
-	void Restart () {
+	public void Restart () {
 		numGhosts = 0;
 		spawn_count = 0f;
 		ghosts = new ArrayList ();
 		MakeGhost ();
 		isDead = false;
-	}
+        dot_count = GameObject.FindGameObjectsWithTag("Dot").Length;
+        isStarted = true;
+    }
 
 	void Dead () {
 		SetHighScore ();
@@ -107,6 +109,7 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (!isStarted) return;
 		// falling
 		if (player.transform.position.y < -100) {
 			lives.Die ();

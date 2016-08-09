@@ -9,6 +9,10 @@ public class VRControler : MonoBehaviour {
     private SteamVR_Controller.Device controller { get { return SteamVR_Controller.Input((int)trackedObj.index); } }
     private SteamVR_TrackedObject trackedObj;
 
+    private TextMesh label { get { return this.GetComponentInChildren<TextMesh>(); } }
+
+    private static bool leftGrabbed = false, rightGrabbed = false, isStarted = false;
+    
     // Use this for initialization
     void Start () {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
@@ -16,7 +20,24 @@ public class VRControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(zboard != null)
+        if (controller != null)
+        {
+            if (controller.GetPressDown(triggerButton))
+            {
+                // release knob
+                Exit();
+            }
+        }
+        if (!isStarted)
+        {
+            if (leftGrabbed && rightGrabbed)
+            {
+                GameObject.FindGameObjectWithTag("Board").GetComponent<GameController>().Restart();
+                isStarted = true;
+            }
+            return;
+        }
+        if (zboard != null)
         {
             Vector3 originRot = zboard.transform.rotation.eulerAngles;
             zboard.transform.rotation = Quaternion.Euler(new Vector3(
@@ -32,13 +53,6 @@ public class VRControler : MonoBehaviour {
                 originRot.y,
                 originRot.z));
         }
-        if(controller != null)
-        {
-            if(controller.GetPressDown(triggerButton))
-            {
-                Exit();
-            }
-        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -52,6 +66,13 @@ public class VRControler : MonoBehaviour {
             {
                 //Debug.Log("zboard is null");
                 zboard = GameObject.FindGameObjectWithTag("Board");
+                TextMesh tm = collider.GetComponentInChildren<TextMesh>();
+                if (tm)
+                {
+                    tm.text = "";
+                 //   label.text = "Press trigger\nto release";
+                }
+                leftGrabbed = true;
             }
         }
         else if(collider.tag == "Handle2")
@@ -63,6 +84,13 @@ public class VRControler : MonoBehaviour {
             {
                 //Debug.Log("xboard is null");
                 xboard = GameObject.FindGameObjectWithTag("Board");
+                TextMesh tm = collider.GetComponentInChildren<TextMesh>();
+                if(tm)
+                {
+                    tm.text = "";
+                   // label.text = "Press trigger\nto release";
+                }
+                rightGrabbed = true;
             }
         }
     }
@@ -83,5 +111,6 @@ public class VRControler : MonoBehaviour {
             xboard.transform.rotation = Quaternion.Euler(new Vector3(0, originRot.y, originRot.z));
             xboard = null;
         }
+        label.text = "";
     }
 }
