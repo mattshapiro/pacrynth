@@ -18,8 +18,8 @@ public class wallcollision_audio : MonoBehaviour {
         if (go.CompareTag("Player"))
         {
             Rigidbody body = go.GetComponent<Rigidbody>();
-            float mag = Mathf.Min(Mathf.Abs(body.velocity.x) + Mathf.Abs(body.velocity.y), 5);
-            float vol = mag / 5;
+            float mag = Mathf.Min(Mathf.Abs(body.velocity.x) + Mathf.Abs(body.velocity.y), 3);
+            float vol = mag / 3;
             source.volume = Mathf.Min(vol, 1);
             source.PlayOneShot(clip, (float)1.0);
         }
