@@ -4,10 +4,11 @@ using System.Collections;
 public class wallcollision_audio : MonoBehaviour {
 
     public AudioClip clip;
-    public AudioSource source;
+    private AudioSource source;
 
     private void Start()
     {
+		source = GetComponent<AudioSource> ();
         source.clip = clip;
         source.loop = false;
     }
